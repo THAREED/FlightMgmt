@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Search Flight.</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <!-- necessary scripts for the dialog -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- fa-fa icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- my style -->
+  <link rel="stylesheet" type="text/css" href="/static/style/style-for-searchFlights.css">
+
+  <script>
+  $(document).ready(function(){
+      $("#search").click(function(){
+          if(confirm("Search Flight now!"))
+          {
+            console.log("request: displayFlight");
+             $("#viewFlight").load("displayFlight.html");
+          }
+
+
+      });
+  });
+  </script>
+  <style>
+    body{
+      background-image: url("/static/image/12.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container" >
+  <h1>FLIGHT</h1>
+  <br><br><br>
+      <form class="row" >
+
+      <div class="col-sm-4" >
+        <div class="form-group">
+          <label for="fromcity">Flying Form</label>
+          <input type="search" class="form-control" id="fromcity" name="fromcity" placeholder="From City">
+        </div>
+
+        <div class="form-group">
+          <label for="departing">Departing Airport</label>
+      	  <!-- <input type="date" class="form-control" id="departing" name="departing">
+  		    <script>document.getElementById("departing").valueAsDate = new Date();</script> -->
+          <select class="form-control" id="departing">
+            <option value="" hidden>Choose a departing</option>
+            <option>Suvarnabumi (BKK)</option>
+            <option>Hat Yai (HDY)</option>
+            <option>Chiang Mai(CNX)</option>
+          </select>
+        </div>
+
+         <div class="form-group">
+          <label for="adults">Adults</label>
+      		<select class="form-control" id="adults">
+                <option value="" hidden>Choose a number</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+      		</select>
+        </div>
+
+
+      </div>
+
+  	<div class="col-sm-4" >
+        <div class="form-group">
+          <label for="tocity">Flying to</label>
+          <input type="search" class="form-control" id="tocity" name="tocity" placeholder="To City">
+        </div>
+
+        <div class="form-group">
+          <label for="destination">Destination Airport</label>
+      	  <!-- <input type="date" class="form-control" id="destination" name="destination">
+  		    <script>document.getElementById("destination").valueAsDate = new Date();</script> -->
+          <select class="form-control" id="destination">
+            <option value="" hidden>Choose a destination</option>
+            <option>Suvarnabumi (BKK)</option>
+            <option>Hat Yai (HDY)</option>
+            <option>Chiang Mai(CNX)</option>
+          </select>
+        </div>
+
+         <div class="form-group">
+          <label for="travelclass">Cabin</label>
+      		<select class="form-control" id="cabin">
+                <option value="" hidden>Choose Travel Class</option>
+                <option>Economy Class</option>
+                <option>Business Class</option>
+                <option>First Class</option>
+      		</select>
+        </div>
+      </div>
+
+        <div class="col-sm-4" style="width: 200px;" id="way">
+            <input type="radio" name="trip" value="oneway"> One Way<br>
+            <input type="radio" name="trip" value="round" checked="checked"> Round Trip<br>
+        </div>
+
+    	</form>
+      <br><br>
+      <button type="submit"  id="search" style="margin-right: auto; display:block"> Search <i class="fa fa-plane"></i> </button>
+
+<!-- </div> -->
+</div>
+
+<div id="viewFlight"></div>
+</body>
+</html>
