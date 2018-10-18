@@ -1,14 +1,14 @@
 [
 
   {
-    "price": "890.00",
+    "price": "1890.00",
     "airline": "Air Asia",
     "takeoff": "BKK 09.05",
     "landing": "CNX 10.15",
     "stop": "2(12)"
   },
   {
-    "price": "949.00",
+    "price": "1949.00",
     "airline": "Thai Lion Air",
     "takeoff": "BKK 09.05",
     "landing": "CNX 10.15",
@@ -22,21 +22,21 @@
     "stop": "1(12)"
   },
   {
-    "price": "949.00",
+    "price": "1949.00",
     "airline": "Nok Air",
     "takeoff": "HDY 09.05",
     "landing": "BKK 10.15",
     "stop": "3(12)"
   },
   {
-    "price": "890.00",
+    "price": "1890.00",
     "airline": "Air Asia",
     "takeoff": "BKK 09.05",
     "landing": "CNX 10.15",
     "stop": "2(12)"
   },
   {
-    "price": "949.00",
+    "price": "1949.00",
     "airline": "Thai Lion Air",
     "takeoff": "TST 09.05",
     "landing": "CNX 10.15",
@@ -50,14 +50,14 @@
     "stop": "1(12)"
   },
   {
-    "price": "890.00",
+    "price": "1890.00",
     "airline": "Air Asia",
     "takeoff": "BKK 09.05",
     "landing": "CNX 10.15",
     "stop": "2(12)"
   },
   {
-    "price": "949.00",
+    "price": "1949.00",
     "airline": "Thai Lion Air",
     "takeoff": "HDY 09.05",
     "landing": "BKK 10.15",
@@ -71,7 +71,7 @@
     "stop": "1(12)"
   },
   {
-    "price": "949.00",
+    "price": "1949.00",
     "airline": "Nok Air",
     "takeoff": "HDY 09.05",
     "landing": "BKK 10.15",
@@ -99,7 +99,7 @@
     "stop": "1(12)"
   },
   {
-    "price": "949.00",
+    "price": "1949.00",
     "airline": "Nok Air",
     "takeoff": "BKK 09.05",
     "landing": "CNX 10.15",
@@ -147,14 +147,14 @@
     "landing": "BKK 10.15",
     "stop": "1(12)"
   },  {
-      "price": "890.00",
+      "price": "1890.00",
       "airline": "Air Asia",
       "takeoff": "BKK 09.05",
       "landing": "CNX 10.15",
       "stop": "2(12)"
     },
     {
-      "price": "949.00",
+      "price": "1949.00",
       "airline": "Thai Lion Air",
       "takeoff": "BKK 09.05",
       "landing": "CNX 10.15",
@@ -168,7 +168,7 @@
       "stop": "1(12)"
     },
     {
-      "price": "949.00",
+      "price": "1949.00",
       "airline": "Nok Air",
       "takeoff": "HDY 09.05",
       "landing": "BKK 10.15",

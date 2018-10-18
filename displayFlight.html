@@ -53,7 +53,8 @@
       <div class="tab-pane fade in active" id="nav-matrix" role="tabpanel" aria-labelledby="nav-matrix-tab">
         <br><br>
         <div class="container">
-          <div id="shownText"></div><br>
+
+          <span id="flightInPage"></span>  <span id="shownText"></span><br><br>
 
           <div class="row">
           <div class="table-responsive">
@@ -68,8 +69,9 @@
               </tr>
             </thead>
               <tbody id="myTable">
-                <tr class="success">
-                  <td><a style="font-size:large; color:#2490d8" href="#">1349.00 <i class="fa fa-btc"></i></a></td>
+                <!-- <tr class="success"> -->
+                <tr>
+                  <td><a style="font-size:30px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">1349.00 <i class="fa fa-btc"></i></a></td>
                   <td>Nok Air</td>
                   <td>BKK 09.05</td>
                   <td>CNX 10.15</td>
@@ -108,7 +110,7 @@
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
-        cell1.innerHTML = '<a style="font-size:large; color:#2490d8" href="#">'+value.price+' <i class="fa fa-btc"></a></i>';
+        cell1.innerHTML = '<a style="font-size:30px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">'+value.price+' <i class="fa fa-btc"></i></a>';
         cell2.innerHTML = value.airline;
         cell3.innerHTML = value.takeoff;
         cell4.innerHTML = value.landing;
@@ -205,7 +207,11 @@
                     endOn = startAt + perPage;
 
                 children.css('display','none').slice(startAt, endOn).show();
-                $("#shownText").text(((page+1)*3)+" of "+numItems+" flights shown - oneway");
+
+                $("#flightInPage").text(( (page+1)*3 ));
+                $("#shownText").text(" of "+numItems+" flights shown - oneway");
+
+                console.log('page: '+(page+1));
                 if (page>=1) {
                     pager.find('.prev_link').show();
                 }
@@ -218,7 +224,7 @@
                 }
                 else {
                     pager.find('.next_link').hide();
-                    $("#shownText").text(numItems+" of "+numItems+" flights shown - oneway");
+                    $("#flightInPage").text(numItems);
                 }
 
                 pager.data("curr",page);
