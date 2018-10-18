@@ -26,6 +26,26 @@ h1 {
   -webkit-text-stroke-color: #3C455C;
 }
 
+#flightInPage{
+  /* style="color:#45ADA8;background-color:#594F4F ;width:10px" */
+     font-size: 150%;
+     color: #7DB95C;
+     text-shadow:1px 1px #1A4A00;
+     background: #3C455C;
+     border-radius: 100%;
+     padding-left: 10px;
+     padding-right: 10px;
+     padding-top: 5px;
+     padding-bottom: 5px;
+     box-shadow: 1px 1px #f6cd61;
+}
+#shownText{
+  color: #f6cd61;
+  text-shadow:2px 1px #3C455C;
+
+
+}
+
 button {
 backface-visibility: hidden;
 position: relative;
@@ -60,7 +80,6 @@ font-style: normal;
   color: #ffffff;
   cursor: default;
   background-color: hsla(0, 100%, 90%, 0.3);
-;
   font-family: myONEDAY;
   border-radius: 30px;
   text-shadow: none;
