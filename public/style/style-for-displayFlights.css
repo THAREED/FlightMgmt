@@ -26,7 +26,7 @@ h1 {
   -webkit-text-stroke-color: #3C455C;
 }
 
-#flightInPage{
+#flightInPage,#flightInPage2{
   /* style="color:#45ADA8;background-color:#594F4F ;width:10px" */
      font-size: 150%;
      color: #7DB95C;
@@ -37,12 +37,13 @@ h1 {
      padding-right: 10px;
      padding-top: 5px;
      padding-bottom: 5px;
-     box-shadow: 1px 1px #f6cd61;
+     box-shadow: 2px 0px #f6cd61;
 }
-#shownText{
-  color: #f6cd61;
-  text-shadow:2px 1px #3C455C;
-
+#shownText,#shownText2{
+  /* color: #f6cd61;
+  text-shadow:2px 1px #3C455C; */
+  color: #3C455C;
+  text-shadow:1px 1px #f6cd61;
 
 }
 
@@ -76,13 +77,14 @@ font-style: normal;
   font-family: myONEDAY;
   text-shadow: none;
 }
-.pager li a{
-  color: #ffffff;
+.page-link,
+.pagination>li>a{
   cursor: default;
-  background-color: hsla(0, 100%, 90%, 0.3);
+  /* background-color:#f6cd61; */
+  background-color:rgba(254,252,234,0.8);
   font-family: myONEDAY;
-  border-radius: 30px;
   text-shadow: none;
+  border-bottom:  2px solid #3C455C;
 }
 .nav-tabs{
   border-bottom: 1px solid #3C455C;
@@ -129,4 +131,76 @@ tbody{
     /* background:rgba(251,247,218,0.8); */
     background:rgba(254,252,234,0.8);
     /* background: hsla(0, 100%, 90%, 0.3); */
+}
+footer{
+  background-color: #f6cd61;
+  color: #3C455C;
+  text-shadow:1px 1px #fff;
+}
+.tableList{
+  border-right: 2px solid #3C455C;
+  width:200px;
+  text-align: center;
+}
+.card{
+  /* background-color: #3C455C; */
+  background: hsla(223, 21%, 30%, 0.60);
+
+}
+.myDetails{
+  border-left:2px solid #3C455C;
+}
+details {
+  margin: 0 auto;
+  transition: all .3s;
+}
+
+details + details {
+  margin-top: 20px;
+}
+
+details[open] {
+  /* min-height: 50px; */
+  background-color: #f6f7f8;
+  box-shadow: 2px 2px 20px rgba(0,0,0,.2);
+}
+
+details p {
+  color: #96999d;
+  font-weight: 300;
+}
+
+summary {
+  font-weight: 500;
+  cursor: pointer;
+  color: #337ab7;
+}
+
+/* removed outline as for codepen only
+  don't remove focus on elements
+  it's bad accessibility
+  don't be _that_ guy
+*/
+summary:focus {
+  outline: none;
+}
+
+summary::-webkit-details-marker {
+  display: none
+}
+
+summary::after {
+  padding: 20px;
+}
+
+details[open] summary::after {
+  content: "☒";
+  font-size: 16px;
+  top: 0;
+  transform: translateY(1);
+  transition: .3s ease;
+}
+
+details[open] summary:hover::after {
+  animation: pulse 1s ease;
 }

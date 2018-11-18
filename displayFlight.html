@@ -43,19 +43,82 @@
         <a class="nav-item nav-link" id="nav-listview-tab" data-toggle="tab" href="#nav-listview" role="tab" aria-controls="nav-listview" aria-selected="false">List View</a>
         <a class="nav-item nav-link active" id="nav-matrix-tab" data-toggle="tab" href="#nav-matrix" role="tab" aria-controls="nav-matrix" aria-selected="true">Matrix View</a>
       </div>
-    </nav>
+    </nav><br>
+    <span id="flightInPage"></span>  <span id="shownText"></span>
 
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane fade" id="nav-listview" role="tabpanel" aria-labelledby="nav-listview-tab">
-        <br><br>
-        <h3> DO SOMETHING!!! </h3>
+        <br>
+        <div class="card-row">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th style="width:220px;  text-align: center;">Price</th>
+                  <th style="width:220px;  text-align: center;">Airline</th>
+                  <th style="width:220px;  text-align: center;">Take-off</th>
+                  <th style="width:220px;  text-align: center;">Landing</th>
+                  <th style="width:220px;  text-align: center;">Stops(Duration)</th>
+                </tr>
+              </thead>
+            </table>
+
+           <!-- <div class="card">
+             <div class="card-body text-center">
+               <table class="table table-hover">
+               <tbody id="myTable2">
+                 <tr>
+                   <td class="tableList"><a style="font-size:34px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">1349.00 <i class="fa fa-btc"></i></a>
+                                         <br><a href="#">select</a></td>
+                   <td  style="width:220px;  text-align: center;">Bangkok Airway</td>
+                   <td  style="width:220px;  text-align: center;">BKK 09.05</td>
+                   <td  style="width:220px;  text-align: center;">CNX 10.15</td>
+                   <td  style="width:220px;  text-align: center;"><h style="font-weight:1000;"> 2(12)<br><br></h></td>
+                 </tr>
+                    <tr>
+                      <td></td>
+                      <td colspan="4" class="myDetails">
+                        <details><summary style="text-align: right">details
+                        <a href="#"> <span class="glyphicon glyphicon-print"> </span></a>
+                        <a href="#"> <span class="glyphicon glyphicon-envelope"> </span></a>
+                        <a href="#"> <span class="glyphicon glyphicon-heart"> </span></a>
+                        <a href="#"> <span class="glyphicon glyphicon-trash"> </span></a>
+                        </summary>
+                        <p> - by Refsnes Data. All Rights Reserved.</p>
+                        <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+                       </details>
+                     </td>
+                    </tr>
+
+               </tbody>
+             </table>
+             </div>
+              <footer>&nbsp&nbsp Book on: <a href="https://www.bangkokair.com"> bangkokair.com</a></footer>
+           </div><br> -->
+
+           <div id="myCard"></div>
+
+
+         </div>
+
+         <br>
+         <div class="form-group">
+          Results Per Page:
+          <select id="results" onchange="changeDisplay()">
+                <!-- <option value="" hidden>Choose a number</option> -->
+                <option value="3" selected >3</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+                <option value="10">10</option>
+          </select>
+        </div>
+
       </div>
+
+
+
       <div class="tab-pane fade in active" id="nav-matrix" role="tabpanel" aria-labelledby="nav-matrix-tab">
-        <br><br>
+        <br>
         <div class="container">
-
-          <span id="flightInPage"></span>  <span id="shownText"></span><br><br>
-
           <div class="row">
           <div class="table-responsive">
             <table class="table table-hover" id="table">
@@ -68,182 +131,142 @@
                 <th>Stops(Duration)</th>
               </tr>
             </thead>
-              <tbody id="myTable">
-                <!-- <tr class="success"> -->
-                <tr>
-                  <td><a style="font-size:30px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">1349.00 <i class="fa fa-btc"></i></a></td>
-                  <td>Nok Air</td>
-                  <td>BKK 09.05</td>
-                  <td>CNX 10.15</td>
-                  <td><h style="font-weight:1000;"> 2(12)  <a style="font-weight:300;" href="#"> details </a><a href="#"> <span class="glyphicon glyphicon-envelope"> </span></a><a href="#"> <span class="glyphicon glyphicon-print"> </span> </a></h></td>
-                </tr>
-
-              </tbody>
+              <tbody id="myTable">  </tbody>
             </table>
           </div>
 
-          <div class="col-md-12 text-center">
-          <ul class="pagination pagination-md pager" id="myPager"></ul>
-          </div>
-          </div>
 
-        </div> <!--end container -->
+        </div>
+
+      </div> <!--end container --><br><br>
+
       </div>
     </div>
+      <div style="position: absolute; left: 50%; margin-left: -100px;">
+        <ul class = "pagination">
+            <li class = "page-item"><a class = "page-link" id = "prev" > <i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
+            <li class = "page-item"><a class = "page-link" id = "current" > 1 </a></li><!-- 	fa fa-hand-o-right-->
+            <li class = "page-item"><a class = "page-link" id = "next" > <i class="fa fa-arrow-right" aria-hidden="true"></i> </a></li>
+        </ul>
+      </div>
 
     </div><br>
   </body>
 
 </html>
+
 <script>
-var table = document.getElementById("myTable");
-$.getJSON('flightInfo.json',function(data)
-{
-  console.log('Flight information is already dowloaded.');
-    var content;
-    var item = [];
-    var count1 = 0;
-        $.each(data,function (key,value)
-        {
-            var row = table.insertRow(0);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            var cell5 = row.insertCell(4);
-            cell1.innerHTML = '<a style="font-size:30px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">'+value.price+' <i class="fa fa-btc"></i></a>';
-            cell2.innerHTML = value.airline;
-            cell3.innerHTML = value.takeoff;
-            cell4.innerHTML = value.landing;
-            cell5.innerHTML = '<h style="font-weight:1000;">'+value.stop+'<a style="font-weight:300;" href="#"> details </a><a href="#"> <span class="glyphicon glyphicon-envelope"> </span></a><a href="#"> <span class="glyphicon glyphicon-print"> </span> </a></h>';
-        });
+   var e = document.getElementById("results");
+   var itemPerPage = parseInt(e.options[e.selectedIndex].text);
+   var currentItem = 1;
+   var maxPage;
+   var data = new Promise(function(resolve, reject){
+       $.getJSON('/static/js/flightInfo.json', function(data){
+           resolve(data);
+       });
+   });
+   var requestJSONData = function(page){
+       data.then(function(fullfiled){
+           maxPage = (fullfiled.length/itemPerPage);
+           tmp = fullfiled.length%itemPerPage;
+           if(tmp > 0)
+           {
+             maxPage = maxPage+1;
+           }
+           var currentItem = parseInt(page);
+           currentItem = (currentItem*itemPerPage)-itemPerPage;
+           var choice = window.location.search;
+           $("#flightInPage").text((currentItem+itemPerPage));
+           if((currentItem+itemPerPage)>fullfiled.length)
+           {
+             $("#flightInPage").text((currentItem+tmp));
+           }
+           $("#shownText").text(' of '+ fullfiled.length+' flights shown - oneway');
+           for(var i=currentItem; i<(currentItem+itemPerPage); i++){
+               $("#myTable").append('<tr><td><a style="font-size:30px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">'+fullfiled[i].price+' <i class="fa fa-btc"></i></a></td>'+
+                   '<td>'+fullfiled[i].airline+'</td>'+
+                   '<td>'+fullfiled[i].takeoff+'</td>'+
+                   '<td>'+fullfiled[i].landing+'</td>'+
+                   '<td>'+fullfiled[i].stop+'&nbsp&nbsp<a style="font-weight:300;" href="#">details</a>&nbsp<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>&nbsp<a href="#"><span class="glyphicon glyphicon-print"></span></a></h></td>'+'</tr>');
+                   $("#myCard").append('<div class="card">'+
+                     '<div class="card-body text-center">'+
+                       '<table class="table table-hover">'+
+                       '<tbody >'+
+                         '<tr>'+
+                           '<td class="tableList"><a style="font-size:34px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">'+fullfiled[i].price+'<i class="fa fa-btc"></i></a>'+
+                                                 '<br><a href="#">select</a></td>'+
+                           '<td  style="width:220px;  text-align: center;">'+fullfiled[i].airline+'</td>'+
+                           '<td  style="width:220px;  text-align: center;">'+fullfiled[i].takeoff+'</td>'+
+                           '<td  style="width:220px;  text-align: center;">'+fullfiled[i].landing+'</td>'+
+                           '<td  style="width:220px;  text-align: center;"><h style="font-weight:1000;">'+fullfiled[i].stop+'<br><br></h>'+
+                            '</td>'+
+                         '</tr>'+
+                         '<tr>'+
+                           '<td></td>'+
+                           '<td colspan="4" class="myDetails">'+
+                             '<details><summary style="text-align: right">details&nbsp'+
+                             '<a href="#"><span class="glyphicon glyphicon-print"></span></a>&nbsp'+
+                             '<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>&nbsp'+
+                             '<a href="#"><span class="glyphicon glyphicon-heart"></span></a>&nbsp'+
+                             '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>&nbsp'+
+                             '</summary>'+
+                             '<p> - by Refsnes Data. All Rights Reserved.</p>'+
+                            '</details>'+
+                          '</td>'+
+                         '</tr>'+
+                       '</tbody>'+
+                     '</table>'+
+                     '</div>'+
+                      '<footer>&nbsp&nbsp Book on: <a href="https:'+'//www.'+fullfiled[i].webname+'">'+fullfiled[i].webname+' : <i class="fa fa-btc"></i>'+fullfiled[i].price+'</a>'+
+                      '</footer>'+
+                   '</div><br>');
+           }
+       });
+   };
+   requestJSONData(currentItem++);
 
-          // insert information another method
-          // console.log( "Flights information is already loaded." );
-          // var dataArr = data;
-          // var html = "";
-          // for (var i = 0; i < dataArr.length; i++)
-          // {
-          //   html = html + '<tr>';
-          //   html = html + '<td><a style=font-size:large;color:#2490d8" href="#">' +  dataArr[i].price  +'<i class="fa fa-btc"></i></a></td>';
-          //   html = html + '<td>'+dataArr[i].airline+'</td>';
-          //   html = html + '<td>'+dataArr[i].takeoff+'</td>';
-          //   html = html + '<td>'+dataArr[i].landing+'</td>';
-          //   html = html + '<td><h style="font-weight:1000;"> '+dataArr[i].stop+'<a style="font-weight:300;" href="#"> details </a><a href="#"> <span class="glyphicon glyphicon-envelope"> </span></a><a href="#"> <span class="glyphicon glyphicon-print"> </span> </a></h></td>';
-          // }
-          // $("#myTable").html(html);
+   $(document).ready(function(){
+       $("#next").click(function(){
+           var check = $("#current").text();
+           var page = parseInt(check);
+           page = page+1;
+           if(page>maxPage){
+               alert("This page is max page!!");
+           }
+           else
+           {
+               $("#myTable").empty();
+               $("#myCard").empty();
+               requestJSONData(page);
+               $("#current").text(page);
+           }
+       });
 
-    $.fn.pageMe = function(opts){
-        var $this = this,
-            defaults = {
-                perPage: 3,
-                showPrevNext: true,
-                hidePageNumbers: false
-            },
-        settings = $.extend(defaults, opts);
-        var listElement = $this;
-        var perPage = settings.perPage;
-        var children = listElement.children();
-        var pager = $('.pager');
-        if (typeof settings.childSelector!="undefined") {
-            children = listElement.find(settings.childSelector);
-        }
+       $("#prev").click(function(){
+           var check = $("#current").text();
+           var page = parseInt(check);
+           page = page-1;
+           if(page<1){
+               alert("This page is the first page!!");
+           }else{
+               $("#myTable").empty();
+               $("#myCard").empty();
+               requestJSONData(page);
+               $("#current").text(page);
+           }
+       });
 
-        if (typeof settings.pagerSelector!="undefined") {
-            pager = $(settings.pagerSelector);
-        }
+   });
 
-        var numItems = children.size();
-        var numPages = Math.ceil(numItems/perPage);
+   function changeDisplay() {
+     if(confirm("You want to display "+e.options[e.selectedIndex].text+" flights on this page?"))
+     {
+       itemPerPage = parseInt(e.options[e.selectedIndex].text);
+       $("#myTable").empty();
+       $("#myCard").empty();
+       requestJSONData(1);
+       $("#current").text(page);
+     }
 
-        pager.data("curr",0);
-
-        if (settings.showPrevNext){
-            $('<li><a href="#" class="prev_link"> « </a></li>').appendTo(pager);
-        }
-        var curr = 0;
-        while(numPages > curr && (settings.hidePageNumbers==false)){
-            $('<li><a href="#" class="page_link">'+(curr+1)+'</a></li>').appendTo(pager);
-            curr++;
-        }
-
-        if (settings.showPrevNext){
-            $('<li><a href="#" class="next_link"> » </a></li>').appendTo(pager);
-        }
-
-        pager.find('.page_link:first').addClass('active');
-        pager.find('.prev_link').hide();
-        if (numPages<=1) {
-            pager.find('.next_link').hide();
-        }
-        pager.children().eq(1).addClass("active");
-        children.hide();
-        children.slice(0, perPage).show();
-
-        pager.find('li .page_link').click(function(){
-            var clickedPage = $(this).html().valueOf()-1;
-            goTo(clickedPage,perPage);
-            return false;
-        });
-        pager.find('li .prev_link').click(function(){
-            previous();
-            return false;
-        });
-        pager.find('li .next_link').click(function(){
-            next();
-            return false;
-        });
-
-        goTo(0);
-        function previous(){
-            var goToPage = parseInt(pager.data("curr")) - 1;
-            goTo(goToPage);
-        }
-
-        function next(){
-            goToPage = parseInt(pager.data("curr")) + 1;
-            goTo(goToPage);
-        }
-
-        function goTo(page){
-            var startAt = page * perPage,
-                endOn = startAt + perPage;
-
-            children.css('display','none').slice(startAt, endOn).show();
-
-            $("#flightInPage").text(( (page+1)*3 ));
-            $("#shownText").text(" of "+numItems+" flights shown - oneway");
-
-            console.log('page: '+(page+1));
-            if (page>=1) {
-                pager.find('.prev_link').show();
-            }
-            else {
-                pager.find('.prev_link').hide();
-            }
-
-            if (page<(numPages-1)) {
-                pager.find('.next_link').show();
-            }
-            else {
-                pager.find('.next_link').hide();
-                $("#flightInPage").text(numItems);
-            }
-
-            pager.data("curr",page);
-            pager.children().removeClass("active");
-            pager.children().eq(page+1).addClass("active");
-        }
-    };
-
-      $(document).ready(function()
-      {
-        $('#myTable').pageMe();
-      });
-  })
-
-.fail(function()
-{
-    console.log("Flight information failed to load.");
-});
+   }
 </script>

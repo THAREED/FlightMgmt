@@ -32,10 +32,19 @@
             console.log("request: displayFlight");
              $("#viewFlight").load("displayFlight.html");
           }
-
-
       });
+
+
+      var radioValue = $("input[name='trip']:checked").val();
+      if(radioValue)
+      {
+          // alert("Your are a - " + radioValue);
+
+      }
+
+
   });
+
   </script>
   <style>
     body{
@@ -127,7 +136,7 @@
 
     	</form>
       <br><br>
-      <button type="submit"  id="search" style="margin-right: auto; display:block"> Submit <i class="fa fa-plane"></i> </button>
+      <button type="submit"  id="search" style="margin-right: auto; display:block"> Search <i class="fa fa-plane"></i> </button>
 
 <!-- </div> -->
 </div>
