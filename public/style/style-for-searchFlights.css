@@ -79,6 +79,9 @@ div{
   text-shadow: 1px 1px #DDE2E3;
 }
 
-#departing, #adults, #tocity, #destination, #cabin, #fromcity{
-  background:rgba(254,252,234,0.8);
+.card-header,footer{
+  background-color: #f6cd61;
+  color: #3C455C;
+  text-shadow:1px 1px #fff;
+  /* height: 40px; */
 }

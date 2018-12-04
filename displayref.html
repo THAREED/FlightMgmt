@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Your Flight.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- fa-fa icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- my style -->
+    <link rel="stylesheet" type="text/css" href="/static/style/style-for-displayFlights.css">
+    <style>
+      body{
+        background-image: url("/static/image/12.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container"><br><br>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link" id="nav-listview-tab" data-toggle="tab" href="#nav-listview" role="tab" aria-controls="nav-listview" aria-selected="false">List View</a>
+        <a class="nav-item nav-link active" id="nav-matrix-tab" data-toggle="tab" href="#nav-matrix" role="tab" aria-controls="nav-matrix" aria-selected="true">Matrix View</a>
+      </div>
+    </nav><br>
+    <span id="flightInPage"></span>  <span id="shownText"></span>
+
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade" id="nav-listview" role="tabpanel" aria-labelledby="nav-listview-tab">
+        <br>
+        <div class="card-row">
+              <table class="table table-hover">
+                <thead>
+                <tr>
+                  <th style="width:220px;  text-align: center;">Price</th>
+                  <th style="width:220px;  text-align: center;">Airline</th>
+                  <th style="width:220px;  text-align: center;">Take-off</th>
+                  <th style="width:220px;  text-align: center;">Landing</th>
+                  <th style="width:220px;  text-align: center;">Stops(Duration)</th>
+                </tr>
+              </thead>
+            </table>
+           <div id="myCard"></div>
+
+
+         </div>
+
+         <br>
+         <div class="form-group">
+          Results Per Page:
+          <select id="results" onchange="changeDisplay()">
+                <!-- <option value="" hidden>Choose a number</option> -->
+                <option value="3" selected >3</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+                <option value="10">10</option>
+          </select>
+        </div>
+
+      </div>
+
+
+
+      <div class="tab-pane fade in active" id="nav-matrix" role="tabpanel" aria-labelledby="nav-matrix-tab">
+        <br>
+        <div class="container">
+          <div class="row">
+          <div class="table-responsive">
+            <table class="table table-hover" id="table">
+              <thead>
+              <tr>
+                <th>Price</th>
+                <th>Airline</th>
+                <th>Take-off</th>
+                <th>Landing</th>
+                <th>Stops(Duration)</th>
+              </tr>
+            </thead>
+              <tbody id="myTable">  </tbody>
+            </table>
+          </div>
+
+
+        </div>
+
+      </div> <!--end container --><br><br>
+
+      </div>
+    </div>
+      <div style="position: absolute; left: 50%; margin-left: -100px;">
+        <ul class = "pagination">
+            <li class = "page-item"><a class = "page-link" id = "prev" > <i class="fa fa-arrow-left" aria-hidden="true"></i></a></li>
+            <li class = "page-item"><a class = "page-link" id = "current" > 1 </a></li><!-- 	fa fa-hand-o-right-->
+            <li class = "page-item"><a class = "page-link" id = "next" > <i class="fa fa-arrow-right" aria-hidden="true"></i> </a></li>
+        </ul>
+      </div>
+
+    </div><br>
+  </body>
+
+</html>
+
+<script>
+   var dateNow = new Date().toLocaleDateString("en-EN", {month: "short", weekday: "long", day: "2-digit", year: "numeric"});
+   // document.getElementById("date").innerHTML = "&nbsp&nbsp&nbsp&nbsp"+dateNow;
+   var e = document.getElementById("results");
+   var itemPerPage = parseInt(e.options[e.selectedIndex].text);
+   var currentItem = 1;
+   var maxPage;
+   var data = new Promise(function(resolve, reject){
+       $.getJSON('/static/js/flightInfo.json', function(data){
+           resolve(data);
+       });
+   });
+   var requestJSONData = function(page){
+       data.then(function(fullfiled){
+           maxPage = (fullfiled.length/itemPerPage);
+           tmp = fullfiled.length%itemPerPage;
+           if(tmp > 0)
+           {
+             maxPage = maxPage+1;
+           }
+           var currentItem = parseInt(page);
+           currentItem = (currentItem*itemPerPage)-itemPerPage;
+           var choice = window.location.search;
+           $("#flightInPage").text((currentItem+itemPerPage));
+           if((currentItem+itemPerPage)>fullfiled.length)
+           {
+             $("#flightInPage").text((currentItem+tmp));
+           }
+           $("#shownText").text(' of '+ fullfiled.length+' flights shown - oneway');
+
+
+          //  Loop on---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+           for(var i=currentItem; i<(currentItem+itemPerPage); i++){
+                var takeoff = fullfiled[i].takeoff;
+                var arrTakeoff = takeoff.split(' ');
+                var landing = fullfiled[i].landing;
+                var arrLanding = landing.split(' ');
+               $("#myTable").append('<tr><td><a style="font-size:30px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">'+fullfiled[i].price+' <i class="fa fa-btc"></i></a></td>'+
+                   '<td>'+fullfiled[i].airline+'</td>'+
+                   '<td>'+fullfiled[i].takeoff+'</td>'+
+                   '<td>'+fullfiled[i].landing+'</td>'+
+                   '<td>'+fullfiled[i].stop+
+                   '&nbsp&nbsp<a style="font-weight:300;" href="#">details</a>&nbsp<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>&nbsp<a href="#"><span class="glyphicon glyphicon-print"></span></a></h></td>'+'</tr>');
+
+
+ //--------------------------------------------------------------------List view Table -------------------------------------------------------------------------------------------------------------------------------
+
+                   $("#myCard").append('<div class="card">'+
+                     '<div class="card-body text-center">'+
+                       '<table class="table table-hover">'+
+                       '<tbody >'+
+                         '<tr>'+
+                           '<td class="tableList"><a style="font-size:34px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">'+fullfiled[i].price+'<i class="fa fa-btc"></i></a>'+
+                                                 '<br><a href="#">select</a></td>'+
+                           '<td  style="width:220px;  text-align: center;">'+fullfiled[i].airline+'</td>'+
+                           '<td  style="width:220px;  text-align: center;">'+fullfiled[i].takeoff+'</td>'+
+                           '<td  style="width:220px;  text-align: center;">'+fullfiled[i].landing+'</td>'+
+                           '<td  style="width:220px;  text-align: center;"><h style="font-weight:1000;">'+fullfiled[i].stop+'<br><br></h>'+
+                            '</td>'+
+                         '</tr>'+
+                         '<tr>'+
+                           '<td></td>'+
+                           '<td colspan="4" class="myDetails">'+
+                             '<details>'+
+                             '<summary style="text-align: right">details&nbsp'+
+                             '<a href="#"><span class="glyphicon glyphicon-print"></span></a>&nbsp'+
+                             '<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>&nbsp'+
+                             '<a href="#"><span class="glyphicon glyphicon-heart"></span></a>&nbsp'+
+                             '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>&nbsp'+
+                             '</summary>'+
+                             '<h2>&nbsp&nbspOUTBOUND</h2>'+
+                             '<p id="date'+i+'"></p>'+
+                             '<table>'+
+                               '<tbody>'+
+                                 '<tr>'+
+                                   '<td rowspan="2">picture</td>'+
+                                   '<td class="bigTime">'+arrTakeoff[1]+'</td>'+
+                                   '<td>'+arrTakeoff[0]+'<br>Terminal</td>'+
+                                 '</tr>'+
+                                 '<tr>'+
+                                   '<td class="bigTime">'+arrLanding[1]+'</td>'+
+                                   '<td>'+arrLanding[0]+'<br>Terminal</td>'+
+                                 '</tr>'+
+                                 '</tbody>'+
+                             '</table>'+
+                             '<p>&nbsp&nbsp&nbsp&nbspFlight# : CS285 | aircraft type: 333 | operated by: Aeroflot<br>'+
+                             '&nbsp&nbsp&nbsp&nbspAdult: Economy | fare N | 2 seats remaining</p>'+
+                             '<div id="myCard2"> </div>'+
+                             '<br><h2>&nbsp&nbspINBOUND</h2>'+
+                             '<p id="date2"></p>'+
+                             '<table>'+
+                               '<tbody>'+
+                                 '<tr>'+
+                                   '<td rowspan="2">picture</td>'+
+                                   '<td class="bigTime">'+arrLanding[1]+'</td>'+
+                                   '<td>'+arrLanding[0]+'<br>Terminal</td>'+
+                                 '</tr>'+
+                                 '<tr>'+
+                                   '<td class="bigTime">'+arrTakeoff[1]+'</td>'+
+                                   '<td>'+arrTakeoff[0]+'<br>Terminal</td>'+
+                                 '</tr>'+
+                              '</tbody>'+
+                             '</table>'+ 
+
+                             '<p>&nbsp&nbsp&nbsp&nbspFlight# : CS285 | aircraft type: 333 | operated by: Aeroflot<br>'+
+                             '&nbsp&nbsp&nbsp&nbspAdult: Economy | fare N | 2 seats remaining</p>'+
+                             '<button type="submit"  id="selectBtn" style="margin: auto; display:block"> Select <i class="fa fa-hand-pointer-o"></i> </button>'+
+                             '<br>'+
+                             
+                            '</details>'+
+                          '</td>'+
+                         '</tr>'+
+                       '</tbody>'+
+                     '</table>'+
+                     '</div>'+
+                      '<footer>&nbsp&nbsp Book on: <a href="https:'+'//www.'+fullfiled[i].webname+'">'+fullfiled[i].webname+' : <i class="fa fa-btc"></i>'+fullfiled[i].price+'</a>'+
+                      '</footer>'+
+                   '</div><br>'
+                   );
+
+                  
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+           }
+       });
+   };
+   requestJSONData(currentItem++);
+
+   $(document).ready(function(){
+       $("#next").click(function(){
+           var check = $("#current").text();
+           var page = parseInt(check);
+           page = page+1;
+           if(page>maxPage){
+               alert("This page is max page!!");
+           }
+           else
+           {
+               $("#myTable").empty();
+               $("#myCard").empty();
+               requestJSONData(page);
+               $("#current").text(page);
+           }
+       });
+
+       $("#prev").click(function(){
+           var check = $("#current").text();
+           var page = parseInt(check);
+           page = page-1;
+           if(page<1){
+               alert("This page is the first page!!");
+           }else{
+               $("#myTable").empty();
+               $("#myCard").empty();
+               requestJSONData(page);
+               $("#current").text(page);
+           }
+       });
+
+   });
+
+   function changeDisplay() {
+     if(confirm("You want to display "+e.options[e.selectedIndex].text+" flights on this page?"))
+     {
+       itemPerPage = parseInt(e.options[e.selectedIndex].text);
+       $("#myTable").empty();
+       $("#myCard").empty();
+       requestJSONData(1);
+       $("#current").text(page);
+     }
+
+   }
+</script>

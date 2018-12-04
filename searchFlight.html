@@ -27,11 +27,25 @@
   <script>
   $(document).ready(function(){
       $("#search").click(function(){
+        if($('#fromcity').val() == "" || $('#tocity').val() == "" || $('#departing').val() == "" || $('#destination').val() == "" || $('#adults').val() == "" || $('#cabin').val() == ""){
+          alert("Please fill in all information!!");
+        }else{
           if(confirm("Search Flight now!"))
           {
+            var choice = $('input[name = trip]:checked').val();
+            document.cookie = choice;
+            //alert(choice);
+            //alert($('#fromcity').val());
+            // localStorage.setItem("FlyingForm", $('#fromcity').val());
+            // localStorage.setItem("ToCity", $('#tocity').val());
+            localStorage.setItem("Departing", $('#departing').val());
+            localStorage.setItem("Destination", $('#destination').val());
+            // localStronge.setItem("Adults", $('#adults').val());
+            // localStorage.setItem("Cabin", $('#cabin').val());
             console.log("request: displayFlight");
              $("#viewFlight").load("displayFlight.html");
           }
+        }
       });
 
 

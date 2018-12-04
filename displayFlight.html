@@ -61,40 +61,6 @@
                 </tr>
               </thead>
             </table>
-
-           <!-- <div class="card">
-             <div class="card-body text-center">
-               <table class="table table-hover">
-               <tbody id="myTable2">
-                 <tr>
-                   <td class="tableList"><a style="font-size:34px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">1349.00 <i class="fa fa-btc"></i></a>
-                                         <br><a href="#">select</a></td>
-                   <td  style="width:220px;  text-align: center;">Bangkok Airway</td>
-                   <td  style="width:220px;  text-align: center;">BKK 09.05</td>
-                   <td  style="width:220px;  text-align: center;">CNX 10.15</td>
-                   <td  style="width:220px;  text-align: center;"><h style="font-weight:1000;"> 2(12)<br><br></h></td>
-                 </tr>
-                    <tr>
-                      <td></td>
-                      <td colspan="4" class="myDetails">
-                        <details><summary style="text-align: right">details
-                        <a href="#"> <span class="glyphicon glyphicon-print"> </span></a>
-                        <a href="#"> <span class="glyphicon glyphicon-envelope"> </span></a>
-                        <a href="#"> <span class="glyphicon glyphicon-heart"> </span></a>
-                        <a href="#"> <span class="glyphicon glyphicon-trash"> </span></a>
-                        </summary>
-                        <p> - by Refsnes Data. All Rights Reserved.</p>
-                        <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
-                       </details>
-                     </td>
-                    </tr>
-
-               </tbody>
-             </table>
-             </div>
-              <footer>&nbsp&nbsp Book on: <a href="https://www.bangkokair.com"> bangkokair.com</a></footer>
-           </div><br> -->
-
            <div id="myCard"></div>
 
 
@@ -156,6 +122,8 @@
 </html>
 
 <script>
+   var dateNow = new Date().toLocaleDateString("en-EN", {month: "short", weekday: "long", day: "2-digit", year: "numeric"});
+   // document.getElementById("date").innerHTML = "&nbsp&nbsp&nbsp&nbsp"+dateNow;
    var e = document.getElementById("results");
    var itemPerPage = parseInt(e.options[e.selectedIndex].text);
    var currentItem = 1;
@@ -166,7 +134,24 @@
        });
    });
    var requestJSONData = function(page){
-       data.then(function(fullfiled){
+       data.then(function(fullfiledTmp){
+          var fullfiled = new Array();
+          for(var j=0 ; j<fullfiledTmp.length ; j++)
+          {
+            var tmp = new Object();
+            tmp["price"] = fullfiledTmp[j].price;
+            tmp["airline"] = fullfiledTmp[j].airline;
+            tmp["takeoff"] = fullfiledTmp[j].takeoff;
+            tmp["landing"] = fullfiledTmp[j].landing;
+            tmp["stop"] = fullfiledTmp[j].stop;
+            tmp["webname"] = fullfiledTmp[j].webname;
+            tmp["takeoff_at"] = fullfiledTmp[j].takeoff_at;
+            tmp["landing_at"] = fullfiledTmp[j].landing_at;
+            if(tmp["takeoff_at"] == localStorage.getItem("Departing") && tmp["landing_at"] == localStorage.getItem("Destination"))
+            {
+              fullfiled.push(tmp);
+            }
+          }
            maxPage = (fullfiled.length/itemPerPage);
            tmp = fullfiled.length%itemPerPage;
            if(tmp > 0)
@@ -182,91 +167,156 @@
              $("#flightInPage").text((currentItem+tmp));
            }
            $("#shownText").text(' of '+ fullfiled.length+' flights shown - oneway');
-           for(var i=currentItem; i<(currentItem+itemPerPage); i++){
-               $("#myTable").append('<tr><td><a style="font-size:30px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">'+fullfiled[i].price+' <i class="fa fa-btc"></i></a></td>'+
-                   '<td>'+fullfiled[i].airline+'</td>'+
-                   '<td>'+fullfiled[i].takeoff+'</td>'+
-                   '<td>'+fullfiled[i].landing+'</td>'+
-                   '<td>'+fullfiled[i].stop+'&nbsp&nbsp<a style="font-weight:300;" href="#">details</a>&nbsp<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>&nbsp<a href="#"><span class="glyphicon glyphicon-print"></span></a></h></td>'+'</tr>');
-                   $("#myCard").append('<div class="card">'+
-                     '<div class="card-body text-center">'+
-                       '<table class="table table-hover">'+
-                       '<tbody >'+
-                         '<tr>'+
-                           '<td class="tableList"><a style="font-size:34px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">'+fullfiled[i].price+'<i class="fa fa-btc"></i></a>'+
-                                                 '<br><a href="#">select</a></td>'+
-                           '<td  style="width:220px;  text-align: center;">'+fullfiled[i].airline+'</td>'+
-                           '<td  style="width:220px;  text-align: center;">'+fullfiled[i].takeoff+'</td>'+
-                           '<td  style="width:220px;  text-align: center;">'+fullfiled[i].landing+'</td>'+
-                           '<td  style="width:220px;  text-align: center;"><h style="font-weight:1000;">'+fullfiled[i].stop+'<br><br></h>'+
-                            '</td>'+
-                         '</tr>'+
-                         '<tr>'+
-                           '<td></td>'+
-                           '<td colspan="4" class="myDetails">'+
-                             '<details><summary style="text-align: right">details&nbsp'+
-                             '<a href="#"><span class="glyphicon glyphicon-print"></span></a>&nbsp'+
-                             '<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>&nbsp'+
-                             '<a href="#"><span class="glyphicon glyphicon-heart"></span></a>&nbsp'+
-                             '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>&nbsp'+
-                             '</summary>'+
-                             '<p> - by Refsnes Data. All Rights Reserved.</p>'+
-                            '</details>'+
-                          '</td>'+
-                         '</tr>'+
-                       '</tbody>'+
-                     '</table>'+
-                     '</div>'+
-                      '<footer>&nbsp&nbsp Book on: <a href="https:'+'//www.'+fullfiled[i].webname+'">'+fullfiled[i].webname+' : <i class="fa fa-btc"></i>'+fullfiled[i].price+'</a>'+
-                      '</footer>'+
-                   '</div><br>');
-           }
-       });
-   };
-   requestJSONData(currentItem++);
 
-   $(document).ready(function(){
-       $("#next").click(function(){
-           var check = $("#current").text();
-           var page = parseInt(check);
-           page = page+1;
-           if(page>maxPage){
-               alert("This page is max page!!");
-           }
-           else
-           {
-               $("#myTable").empty();
-               $("#myCard").empty();
-               requestJSONData(page);
-               $("#current").text(page);
-           }
-       });
+                     //  Loop on---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                      for(var i=currentItem; i<(currentItem+itemPerPage); i++){
+                           var takeoff = fullfiled[i].takeoff;
+                           var arrTakeoff = takeoff.split(' ');
+                           var landing = fullfiled[i].landing;
+                           var arrLanding = landing.split(' ');
+                           var idTable = "mycard"+i;
+                          $("#myTable").append('<tr><td><a style="font-size:30px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">'+fullfiled[i].price+' <i class="fa fa-btc"></i></a></td>'+
+                              '<td>'+fullfiled[i].airline+'</td>'+
+                              '<td>'+fullfiled[i].takeoff+'</td>'+
+                              '<td>'+fullfiled[i].landing+'</td>'+
+                              '<td>'+fullfiled[i].stop+
+                              '&nbsp&nbsp<a style="font-weight:300;" href="#">details</a>&nbsp<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>&nbsp<a href="#"><span class="glyphicon glyphicon-print"></span></a></h></td>'+'</tr>');
 
-       $("#prev").click(function(){
-           var check = $("#current").text();
-           var page = parseInt(check);
-           page = page-1;
-           if(page<1){
-               alert("This page is the first page!!");
-           }else{
-               $("#myTable").empty();
-               $("#myCard").empty();
-               requestJSONData(page);
-               $("#current").text(page);
-           }
-       });
 
-   });
+            //--------------------------------------------------------------------List view Table -------------------------------------------------------------------------------------------------------------------------------
 
-   function changeDisplay() {
-     if(confirm("You want to display "+e.options[e.selectedIndex].text+" flights on this page?"))
-     {
-       itemPerPage = parseInt(e.options[e.selectedIndex].text);
-       $("#myTable").empty();
-       $("#myCard").empty();
-       requestJSONData(1);
-       $("#current").text(page);
-     }
+                              $("#myCard").append('<div class="card">'+
+                                '<div class="card-body text....-center">'+
+                                  '<table class="table tab.le-hover">'+
+                                  '<tbody >'+
+                                    '<tr>'+
+                                      '<td class="tableList"><a style="font-size:34px; color:#2490d8; text-shadow: 2px 2px #f6cd61;" href="#">'+fullfiled[i].price+'<i class="fa fa-btc"></i></a>'+
+                                                            '<br><a href="#">select</a></td>'+
+                                      '<td  style="width:220px;  text-align: center;">'+fullfiled[i].airline+'</td>'+
+                                      '<td  style="width:220px;  text-align: center;">'+fullfiled[i].takeoff+'</td>'+
+                                      '<td  style="width:220px;  text-align: center;">'+fullfiled[i].landing+'</td>'+
+                                      '<td  style="width:220px;  text-align: center;"><h style="font-weight:1000;">'+fullfiled[i].stop+'<br><br></h>'+
+                                       '</td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                      '<td></td>'+
+                                      '<td colspan="4" class="myDetails">'+
+                                        '<details><summary style="text-align: right">details&nbsp'+
+                                        '<a href="#"><span class="glyphicon glyphicon-print"></span></a>&nbsp'+
+                                        '<a href="#"><span class="glyphicon glyphicon-envelope"></span></a>&nbsp'+
+                                        '<a href="#"><span class="glyphicon glyphicon-heart"></span></a>&nbsp'+
+                                        '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>&nbsp'+
+                                        '</summary>'+
+                                        '<h2>&nbsp&nbspOUTBOUND</h2>'+
+                                        '<p id="date'+i+'"></p>'+
+                                        '<table>'+
+                                          '<tbody>'+
+                                            '<tr>'+
+                                              '<td rowspan="2">picture</td>'+
+                                              '<td class="bigTime">'+arrTakeoff[1]+'</td>'+
+                                              '<td>'+arrTakeoff[0]+'<br>Terminal</td>'+
+                                            '</tr>'+
+                                            '<tr>'+
+                                              '<td class="bigTime">'+arrLanding[1]+'</td>'+
+                                              '<td>'+arrLanding[0]+'<br>Terminal</td>'+
+                                            '</tr>'+
+                                            '</tbody>'+
+                                        '</table>'+
+                                        '<p>&nbsp&nbsp&nbsp&nbspFlight# : CS285 | aircraft type: 333 | operated by: Aeroflot<br>'+
+                                        '&nbsp&nbsp&nbsp&nbspAdult: Economy | fare N | 2 seats remaining</p>'+
+                   //----------------------------------------------------------------------------------------------------------
+                                        '<div id="'+idTable+'"> </div>'+
+                   //------------------------------------------------------------------------------------------------------------
+                                        '<button type="submit"  id="selectBtn" onclick="goToDetail()" style="margin: auto; display:block"> Select <i class="fa fa-hand-pointer-o"></i> </button>'+
+                                        '<br>'+
+                                       '</details>'+
+                                     '</td>'+
+                                    '</tr>'+
+                                  '</tbody>'+
+                                '</table>'+
+                                '</div>'+
+                                 '<footer>&nbsp&nbsp Book on: <a href="https:'+'//www.'+fullfiled[i].webname+'">'+fullfiled[i].webname+' : <i class="fa fa-btc"></i>'+fullfiled[i].price+'</a>'+
+                                 '</footer>'+
+                              '</div><br>');
 
-   }
+
+
+             //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                           if(document.cookie == "round"){
+                                $("#"+idTable+"").append('<br><h2>&nbsp&nbspINBOUND</h2>'+
+                                        '<p id="date2"></p>'+
+                                        '<table>'+
+                                          '<tbody>'+
+                                            '<tr>'+
+                                              '<td rowspan="2">picture</td>'+
+                                              '<td class="bigTime">'+arrLanding[1]+'</td>'+
+                                              '<td>'+arrLanding[0]+'<br>Terminal</td>'+
+                                            '</tr>'+
+                                            '<tr>'+
+                                              '<td class="bigTime">'+arrTakeoff[1]+'</td>'+
+                                              '<td>'+arrTakeoff[0]+'<br>Terminal</td>'+
+                                            '</tr>'+
+                                         '</tbody>'+
+                                        '</table>'+ '&nbsp&nbsp&nbsp&nbspAdult: Economy | fare N | 2 seats remaining</p>'
+
+                                 );
+                              }
+                      }
+
+                  });
+              };
+              requestJSONData(currentItem++);
+
+              $(document).ready(function(){
+                  $("#next").click(function(){
+                      var check = $("#current").text();
+                      var page = parseInt(check);
+                      page = page+1;
+                      if(page>maxPage){
+                          alert("This page is max page!!");
+                      }
+                      else
+                      {
+                          $("#myTable").empty();
+                          $("#myCard").empty();
+                          requestJSONData(page);
+                          $("#current").text(page);
+                      }
+                  });
+
+                  $("#prev").click(function(){
+                      var check = $("#current").text();
+                      var page = parseInt(check);
+                      page = page-1;
+                      if(page<1){
+                          alert("This page is the first page!!");
+                      }else{
+                          $("#myTable").empty();
+                          $("#myCard").empty();
+                          requestJSONData(page);
+                          $("#current").text(page);
+                      }
+                  });
+
+
+
+              });
+
+              function changeDisplay() {
+                if(confirm("You want to display "+e.options[e.selectedIndex].text+" flights on this page?"))
+                {
+                  itemPerPage = parseInt(e.options[e.selectedIndex].text);
+                  $("#myTable").empty();
+                  $("#myCard").empty();
+                  requestJSONData(1);
+                  $("#current").text(page);
+                }
+
+              }
+
+              function goToDetail()
+              {
+                window.location.replace("passengerdetail.html");
+              }
+
 </script>

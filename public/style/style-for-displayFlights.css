@@ -64,6 +64,33 @@ font-family: myONEDAY;
 font-weight: 100;
 font-style: normal;
 }
+button > div {
+  color: #999999;
+font-size: 10px;
+font-family: myONEDAY;
+font-weight: initial;
+font-style: normal;
+text-align: center;
+margin: 0px 0px 0px 0px
+}
+button > i {
+color: #3C455C ;
+font-size: 1em;
+background: #ffffff;
+border-radius: 88px;
+border: 0px solid #6ec286;
+border-width: 0px 0px 0px 0px;
+padding: 4px 4px 4px 4px;
+margin: 0px 010px 0px 0px;
+position: absolute;
+top: 9px;
+left: 17px;
+width: 24px;
+height: 24px
+}
+button > .ld {
+  font-size: initial
+}
 .pagination>.active>a,
 .pagination>.active>a:focus,
 .pagination>.active>a:hover,
@@ -149,9 +176,15 @@ footer{
 }
 .myDetails{
   border-left:2px solid #3C455C;
+  text-align: left;
+}
+.bigTime{
+  color: #3C455C;
+  text-shadow:1px 1px #f6cd61;
+  font-size: 34px;
 }
 details {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   transition: all .3s;
 }
 

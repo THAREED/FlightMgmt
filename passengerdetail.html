@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Search Flight.</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <!-- necessary scripts for the dialog -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- fa-fa icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- my style -->
+  <link rel="stylesheet" type="text/css" href="/static/style/style-for-searchFlights.css">
+
+  <script>
+    var count = 0;
+    function goToInsurance()
+    {
+      count++;
+      if(count == 1)
+      {
+        $("#insurance").append(
+        '<div class="card">'+
+         '<div class="card-header"> Travel Insurance </div>'+
+         '<form class="row" >'+
+           '<div class="col-sm-6">'+
+             '<div class="card-body text-left"><br><br>'+
+             '<input type="checkbox" name="late" value="late" checked>  Luggage insurance lost or delayed<br> &nbsp&nbsp&nbsp(Price: 350 THB)<br>'+
+             '<details style="color:#b1b4bd"><summary style="text-align: left;color:#b1b4bd">More details</summary>'+
+              ' Somthing in this box'+
+             '</details>'+
+              '</div><br>'+
+         '&nbsp&nbsp&nbsp&nbsp&nbsp--------------------------------------------------------------------------------'+
+         '<br><br>'+
+          '  <div class="card-body text-left">'+
+          '  <input type="checkbox" name="late" value="late">  Accident and Health Insurance<br> &nbsp&nbsp&nbsp(Price: 1000 THB)<br>'+
+          '  <details style="color:#b1b4bd"><summary style="text-align: left;color:#b1b4bd">More details</summary>'+
+          '     Somthing in this box'+
+          '  </details>'+
+         '</div>'+
+       '</div>'+
+       '<div class="col-sm-6">'+
+        ' <img class="card-img" src="/static/image/insurance2.jpg" width="40%">'+
+       '</div>'+
+        '</form>'+
+       '</div> <br>');
+      }
+
+
+    }
+
+  </script>
+  <style>
+    body{
+      background-image: url("/static/image/12.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1 style="font-size: 50px;">Passenger&nbsp&nbsp&nbspDetails.</h1>
+  <br><br><br>
+  <form class="row" >
+      <div class="col-sm-3" >
+              <div class="row">
+                &nbsp&nbsp&nbsp<div class="form-group">
+                 <label for="title">Title *</label>
+                  <select class="form-control" id="title" style="width:90px">
+                       <option value="" hidden>Select</option>
+                       <option>MR</option>
+                       <option>MS</option>
+                       <option>MRS</option>
+                       <option>MONK</option>
+                 </select>
+               </div>
+               &nbsp&nbsp&nbsp&nbsp&nbsp
+                <div class="form-group">
+                  <label for="firstname">First name *</label>
+                  <input style="width:150px" class="form-control" id="firstname" name="firstname" placeholder="Eg. Songsak">
+               </div>
+              </div>
+
+        <div class="form-group">
+          <label for="passportNo">Passport No. *</label>
+          <input class="form-control" id="passportNo" name="passportNo" placeholder="Eg. 123456789">
+        </div>
+
+    </div>
+
+  	<div class="col-sm-3" >
+        <div class="form-group">
+          <label for="lastname">Last name *</label>
+          <input class="form-control" id="lastname" name="lastname" placeholder="Rongviriya">
+        </div>
+
+        <div class="form-group">
+          <label for="country">Country</label>
+          <select class="form-control" id="country">
+            <option value="" hidden>Choose a country</option>
+            <option>Thailand</option>
+            <option>China</option>
+            <option>United Kingdom</option>
+            <option>United States</option>
+
+          </select>
+        </div>
+
+      </div>
+        <div class="col-sm-3" style="width: 200px;" id="way">
+          <div class="form-group">
+            <label for="birthdate">Birth date *</label><br>
+            <input class="form-control" type="date" id="birthdate" name="birthdate" max="2018-12-10">
+          </div>
+          <div class="form-group">
+            <label for="passportExp">Passport Expiration Date *</label><br>
+            <input class="form-control" type="date" id="passportExp" name="passportExp">
+          </div>
+        </div>
+
+
+        <div class="col-sm-3">
+            <div class="card">
+              <div class="card-header"> Payment Information </div>
+              <div class="card-body text-center">
+                  <details><summary style="text-align: left">Flight: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <label id="flight">1790 THB</label></summary>
+                    Somthing in this box
+                  </details>
+                  <details><summary style="text-align: left">Tax: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <label id="tax">290 THB</label></summary>
+                    Somthing in this box
+                  </details>
+                  <details><summary style="text-align: left">Services Fee: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <label id="fee">0 THB</label></summary>
+                    Somthing in this box
+                  </details>
+                  <details><summary style="text-align: left">Discount: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <label id="discount">0 THB</label></summary>
+                    Somthing in this box
+                  </details>
+              </div>
+              <footer style="text-align: right;"> Total: 2080 THB &nbsp&nbsp </footer>
+
+            </div>
+        </div>
+
+    	</form>
+      <br>
+</div>
+<br><br>
+<div class="container" id="insurance"></div>
+<button type="submit"  id="next" style="margin: auto; display:block" onclick="goToInsurance()"> Next <i class="fa fa-angle-double-right"></i> </button>
+<br><br>
+
+
+</body>
+</html>
